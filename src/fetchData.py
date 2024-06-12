@@ -51,8 +51,8 @@ def download_all_USGS_sensor_data(start_time, end_time):
 
 if __name__ == "__main__":
     # Define the date range
-    start_time = '2024-06-01T09:05:00Z'
-    end_time = '2024-06-08T09:05:00Z'
+    start_time = '2024-06-02T09:05:00Z'
+    end_time = '2024-06-09T09:05:00Z'
 
     # Download data for all sensors
     download_all_USGS_sensor_data(start_time, end_time)
