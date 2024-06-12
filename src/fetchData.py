@@ -38,7 +38,7 @@ def download_all_USGS_sensor_data(start_time, end_time):
     end_time_str = format_date(end_time)
 
     # Read the sensor data from the JSON file
-    with open('config/sensorData.json') as file:
+    with open('config/sensor_data.json') as file:
         sensor_data = json.load(file)
 
     # Create a folder name based on the start and end dates
@@ -88,6 +88,18 @@ def parse_arguments():
 def get_day_name(date):
     return date.strftime("%A")
 
+def save_last_run_config(start_time, end_time):
+    config_data = {
+        "start_date": start_time.strftime("%Y-%m-%d"),
+        "start_time": start_time.strftime("%H:%M:%S"),
+        "end_date": end_time.strftime("%Y-%m-%d"),
+        "end_time": end_time.strftime("%H:%M:%S")
+    }
+
+    # Write the configuration data to a JSON file
+    with open('config/last_run.json', 'w') as file:
+        json.dump(config_data, file, indent=4)
+
 if __name__ == "__main__":
 # Parse command-line arguments
     args = parse_arguments()
@@ -105,3 +117,5 @@ if __name__ == "__main__":
 
     # Download data for all sensors
     download_all_USGS_sensor_data(start_time, end_time)
+
+    save_last_run_config(start_time, end_time)
