@@ -55,7 +55,7 @@ python scripts/download_usgs_data.py
 
 ## Errors Encountered
 
-**Data Error:**
+~~Data Error:\*\*
 
 Data for the following parameters are available until June 5th only when the starting date is June 2nd:
 
@@ -70,7 +70,7 @@ The following parameters seem to have correct data, but verification with more d
 - Dissolved Oxygen
 - Specific Conductance
 - Turbidity
-- Water Temperature
+- Water Temperature~~
 
 **Date Error:**
 

@@ -8,14 +8,23 @@ def fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time):
     # Construct the URL with the sensor ID and filter parameters
     url = f"{base_url}('{sensor_id}')/Observations?$filter=phenomenonTime ge {start_time} and phenomenonTime le {end_time}"
 
-    # Send a GET request to the API
-    response = requests.get(url)
+    all_observations = []
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        return response.json()  # Return the JSON data from the response
-    else:
-        return f"Error: {response.status_code}, {response.text}"  # Return an error message
+    while url:
+        # Send a GET request to the API
+        response = requests.get(url)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            data = response.json()
+            all_observations.extend(data['value'])
+
+            # Check if there is a next link
+            url = data.get('@iot.nextLink')
+        else:
+            return f"Error: {response.status_code}, {response.text}"  # Return an error message
+
+    return all_observations
 
 def download_all_USGS_sensor_data(start_time, end_time):
     # Read the sensor data from the JSON file
@@ -35,7 +44,7 @@ def download_all_USGS_sensor_data(start_time, end_time):
         # Fetch the observations for the current sensor
         observations = fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time)
 
-        if isinstance(observations, dict):
+        if isinstance(observations, list):
             # Generate the output file name with the sensor name
             output_file = f"{folder_name}/{sensor_name}.json"
 
@@ -51,8 +60,8 @@ def download_all_USGS_sensor_data(start_time, end_time):
 
 if __name__ == "__main__":
     # Define the date range
-    start_time = '2024-06-02T09:05:00Z'
-    end_time = '2024-06-09T09:05:00Z'
+    start_time = '2024-06-02T09:00:00Z'
+    end_time = '2024-06-09T09:00:00Z'
 
     # Download data for all sensors
     download_all_USGS_sensor_data(start_time, end_time)
