@@ -2,6 +2,8 @@ import requests
 import json
 import os
 from datetime import datetime
+import argparse
+import sys
 
 def format_date(date):
     return date.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -66,10 +68,40 @@ def download_all_USGS_sensor_data(start_time, end_time):
 
         print()  # Print a blank line for separation
 
+def parse_arguments():
+    if len(sys.argv) != 9:
+        print("Error: Incorrect number of arguments.")
+        print("Usage: python script_name.py <start_date> <start_time> <end_date> <end_time>")
+        print("Example: python script_name.py 2024-06-02 09:00:00 2024-06-09 09:00:00")
+        sys.exit(1)
+    parser = argparse.ArgumentParser(description='Download USGS sensor data.')
+    parser.add_argument('--start-date', type=str, required=True,
+                        help='Start date in the format YYYY-MM-DD')
+    parser.add_argument('--start-time', type=str, default='00:00:00',
+                        help='Start time in the format HH:MM:SS (default: 00:00:00)')
+    parser.add_argument('--end-date', type=str, required=True,
+                        help='End date in the format YYYY-MM-DD')
+    parser.add_argument('--end-time', type=str, default='23:59:59',
+                        help='End time in the format HH:MM:SS (default: 23:59:59)')
+    return parser.parse_args()
+
+def get_day_name(date):
+    return date.strftime("%A")
+
 if __name__ == "__main__":
-    # Define the date range using datetime objects
-    start_time = datetime(2024, 6, 2, 9, 0, 0)
-    end_time = datetime(2024, 6, 9, 9, 0, 0)
+# Parse command-line arguments
+    args = parse_arguments()
+
+    # Create datetime objects from the provided arguments
+    start_time = datetime.strptime(f"{args.start_date} {args.start_time}", "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime(f"{args.end_date} {args.end_time}", "%Y-%m-%d %H:%M:%S")
+
+    # Get the day names for start_time and end_time
+    start_day = get_day_name(start_time)
+    end_day = get_day_name(end_time)
+
+    print(f"Start Day: {start_day}")
+    print(f"End Day: {end_day}")
 
     # Download data for all sensors
     download_all_USGS_sensor_data(start_time, end_time)
