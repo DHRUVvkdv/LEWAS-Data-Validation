@@ -4,6 +4,7 @@ import os
 from datetime import datetime
 import argparse
 import sys
+import pytz
 
 def format_date(date):
     return date.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -88,6 +89,12 @@ def parse_arguments():
 def get_day_name(date):
     return date.strftime("%A")
 
+def convert_est_to_utc(est_time):
+    est_tz = pytz.timezone('US/Eastern')
+    est_time = est_tz.localize(est_time)
+    utc_time = est_time.astimezone(pytz.utc)
+    return utc_time
+
 def save_last_run_config(start_time, end_time):
     config_data = {
         "start_date": start_time.strftime("%Y-%m-%d"),
@@ -101,21 +108,19 @@ def save_last_run_config(start_time, end_time):
         json.dump(config_data, file, indent=4)
 
 if __name__ == "__main__":
-# Parse command-line arguments
+    # Parse command-line arguments
     args = parse_arguments()
 
-    # Create datetime objects from the provided arguments
-    start_time = datetime.strptime(f"{args.start_date} {args.start_time}", "%Y-%m-%d %H:%M:%S")
-    end_time = datetime.strptime(f"{args.end_date} {args.end_time}", "%Y-%m-%d %H:%M:%S")
+    # Create datetime objects from the provided arguments (assuming EST)
+    start_time_est = datetime.strptime(f"{args.start_date} {args.start_time}", "%Y-%m-%d %H:%M:%S")
+    end_time_est = datetime.strptime(f"{args.end_date} {args.end_time}", "%Y-%m-%d %H:%M:%S")
 
-    # Get the day names for start_time and end_time
-    start_day = get_day_name(start_time)
-    end_day = get_day_name(end_time)
-
-    print(f"Start Day: {start_day}")
-    print(f"End Day: {end_day}")
+    # Convert EST times to UTC
+    start_time_utc = convert_est_to_utc(start_time_est)
+    end_time_utc = convert_est_to_utc(end_time_est)
 
     # Download data for all sensors
-    download_all_USGS_sensor_data(start_time, end_time)
+    download_all_USGS_sensor_data(start_time_utc, end_time_utc)
 
-    save_last_run_config(start_time, end_time)
+    # Save the last run configuration
+    save_last_run_config(start_time_utc, end_time_utc)
