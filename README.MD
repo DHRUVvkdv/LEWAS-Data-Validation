@@ -52,3 +52,27 @@ To download data from the USGS Water Data API, run the following command:
 ```sh
 python scripts/download_usgs_data.py
 ```
+
+## Errors Encountered
+
+**Data Error:**
+
+Data for the following parameters are available until June 5th only when the starting date is June 2nd:
+
+- Air temperature
+- Discharge
+- Gage Height
+- Precipitation
+
+The following parameters seem to have correct data, but verification with more data is recommended:
+
+- ph level
+- Dissolved Oxygen
+- Specific Conductance
+- Turbidity
+- Water Temperature
+
+**Date Error:**
+
+- Convert user input to Coordinated Universal Time (UTC) before making the API request.
+- Convert the data received from the API to Eastern Standard Time (EST) format for display.
