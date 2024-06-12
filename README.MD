@@ -13,7 +13,6 @@ The **LEWAS Water Quality Data Verification** project aims to compare water qual
 ## External Data Sources
 
 1. **USGS Water Data API**
-2. **Another Water Quality Data Source** (Specify the name and details)
 
 ## Project Structure
 
@@ -22,7 +21,6 @@ The project is organized as follows:
 - `scripts/`: Contains scripts for downloading and processing data.
 - `data/`: Directory intended for storing downloaded data files. (**Note**: Not uploaded to the repository)
 - `results/`: Directory for storing comparison results and analysis.
-- `notebooks/`: Jupyter notebooks for data analysis and visualization.
 - `requirements.txt`: Dependencies needed for the project.
 - `README.md`: Project documentation (this file).
 
