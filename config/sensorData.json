@@ -1,0 +1,130 @@
+{
+    "commonData": {
+      "observedArea": {
+        "type": "Point",
+        "coordinates": [-79.9375556, 37.2779444]
+      }
+    },
+    "sensorNameToId": {
+        "Water Temperature": "013aa08695eb49cf9328da303b8dbd85",
+        "Air Temperature": "256e5de1f574460da1422c1c3f1ad84a",
+        "Turbidity": "35676f15e0044ae49c14cc2a5111c0f6",
+        "Gage Height": "3e70ddb5066d4378b6f07e31b02e2bf8",
+        "Dissolved Oxygen": "638141ab36304871b60710755af7f468",
+        "pH Level": "748779aabcfc49dca056eb519c25a623",
+        "Precipitation": "760596df94154f30a1328cbc9513c910",
+        "Specific Conductance": "bbc213cf0af24f68828d574960ead75b",
+        "Discharge": "ce136e046e7b41bfb1419c412f6f52b7"
+      },
+    "sensors": [
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('013aa08695eb49cf9328da303b8dbd85')",
+        "id": "013aa08695eb49cf9328da303b8dbd85",
+        "name": "013aa08695eb49cf9328da303b8dbd85",
+        "description": "Temperature, water / USGS-0205551460-013aa08695eb49cf9328da303b8dbd85",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "Degrees Centigrade",
+          "symbol": "degC",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('256e5de1f574460da1422c1c3f1ad84a')",
+        "id": "256e5de1f574460da1422c1c3f1ad84a",
+        "name": "256e5de1f574460da1422c1c3f1ad84a",
+        "description": "Temperature, air, degrees Celsius / USGS-0205551460-256e5de1f574460da1422c1c3f1ad84a",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "Degrees Centigrade",
+          "symbol": "degC",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('35676f15e0044ae49c14cc2a5111c0f6')",
+        "id": "35676f15e0044ae49c14cc2a5111c0f6",
+        "name": "35676f15e0044ae49c14cc2a5111c0f6",
+        "description": "Turbidity, water, unfiltered, monochrome near infra-red LED light, 780-900 nm, detection angle 90 +-2.5 degrees, formazin nephelometric units (FNU) / USGS-0205551460-35676f15e0044ae49c14cc2a5111c0f6",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "_FNU",
+          "symbol": "_FNU",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('3e70ddb5066d4378b6f07e31b02e2bf8')",
+        "id": "3e70ddb5066d4378b6f07e31b02e2bf8",
+        "name": "3e70ddb5066d4378b6f07e31b02e2bf8",
+        "description": "Gage height, feet / USGS-0205551460-3e70ddb5066d4378b6f07e31b02e2bf8",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "Feet",
+          "symbol": "ft",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('638141ab36304871b60710755af7f468')",
+        "id": "638141ab36304871b60710755af7f468",
+        "name": "638141ab36304871b60710755af7f468",
+        "description": "Dissolved oxygen / USGS-0205551460-638141ab36304871b60710755af7f468",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "Milligrams per Liter",
+          "symbol": "mg/l",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('748779aabcfc49dca056eb519c25a623')",
+        "id": "748779aabcfc49dca056eb519c25a623",
+        "name": "748779aabcfc49dca056eb519c25a623",
+        "description": "pH, water, unfiltered, field, standard units / USGS-0205551460-748779aabcfc49dca056eb519c25a623",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "ph Units",
+          "symbol": "pH Units",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('760596df94154f30a1328cbc9513c910')",
+        "id": "760596df94154f30a1328cbc9513c910",
+        "name": "760596df94154f30a1328cbc9513c910",
+        "description": "Precipitation, total, inches / USGS-0205551460-760596df94154f30a1328cbc9513c910",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "in",
+          "symbol": "in",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('bbc213cf0af24f68828d574960ead75b')",
+        "id": "bbc213cf0af24f68828d574960ead75b",
+        "name": "bbc213cf0af24f68828d574960ead75b",
+        "description": "Specific cond at 25C / USGS-0205551460-bbc213cf0af24f68828d574960ead75b",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "uS/cm",
+          "symbol": "uS/cm",
+          "definition": ""
+        }
+      },
+      {
+        "selfLink": "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('ce136e046e7b41bfb1419c412f6f52b7')",
+        "id": "ce136e046e7b41bfb1419c412f6f52b7",
+        "name": "ce136e046e7b41bfb1419c412f6f52b7",
+        "description": "Discharge / USGS-0205551460-ce136e046e7b41bfb1419c412f6f52b7",
+        "observationType": "Instantaneous",
+        "unitOfMeasurement": {
+          "name": "Cubic Feet per Second",
+          "symbol": "ft^3/s",
+          "definition": ""
+        }
+      }
+    ]
+  }
+  
