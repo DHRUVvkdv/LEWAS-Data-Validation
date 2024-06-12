@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-def fetch_observations(sensor_name, sensor_id, start_time, end_time):
+def fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time):
     # Base URL of the API
     base_url = "https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams"
     # Construct the URL with the sensor ID and filter parameters
@@ -17,13 +17,13 @@ def fetch_observations(sensor_name, sensor_id, start_time, end_time):
     else:
         return f"Error: {response.status_code}, {response.text}"  # Return an error message
 
-def download_all_sensor_data(start_time, end_time):
+def download_all_USGS_sensor_data(start_time, end_time):
     # Read the sensor data from the JSON file
     with open('config/sensorData.json') as file:
         sensor_data = json.load(file)
 
     # Create a folder name based on the start and end dates
-    folder_name = f"data/raw/{start_time}_{end_time}"
+    folder_name = f"data/raw/{start_time}_{end_time}/USGS_Data"
 
     # Create the folder if it doesn't exist
     os.makedirs(folder_name, exist_ok=True)
@@ -33,7 +33,7 @@ def download_all_sensor_data(start_time, end_time):
         print(f"Downloading data for sensor: {sensor_name}")
 
         # Fetch the observations for the current sensor
-        observations = fetch_observations(sensor_name, sensor_id, start_time, end_time)
+        observations = fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time)
 
         if isinstance(observations, dict):
             # Generate the output file name with the sensor name
@@ -55,4 +55,4 @@ if __name__ == "__main__":
     end_time = '2024-06-08T09:05:00Z'
 
     # Download data for all sensors
-    download_all_sensor_data(start_time, end_time)
+    download_all_USGS_sensor_data(start_time, end_time)
