@@ -1,6 +1,10 @@
 import requests
 import json
 import os
+from datetime import datetime
+
+def format_date(date):
+    return date.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time):
     # Base URL of the API
@@ -27,12 +31,16 @@ def fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time):
     return all_observations
 
 def download_all_USGS_sensor_data(start_time, end_time):
+    # Convert start_time and end_time to the required string format
+    start_time_str = format_date(start_time)
+    end_time_str = format_date(end_time)
+
     # Read the sensor data from the JSON file
     with open('config/sensorData.json') as file:
         sensor_data = json.load(file)
 
     # Create a folder name based on the start and end dates
-    folder_name = f"data/raw/{start_time}_{end_time}/USGS_Data"
+    folder_name = f"data/raw/{start_time_str}_{end_time_str}/USGS_Data"
 
     # Create the folder if it doesn't exist
     os.makedirs(folder_name, exist_ok=True)
@@ -42,7 +50,7 @@ def download_all_USGS_sensor_data(start_time, end_time):
         print(f"Downloading data for sensor: {sensor_name}")
 
         # Fetch the observations for the current sensor
-        observations = fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time)
+        observations = fetch_USGS_observations(sensor_name, sensor_id, start_time_str, end_time_str)
 
         if isinstance(observations, list):
             # Generate the output file name with the sensor name
@@ -59,9 +67,9 @@ def download_all_USGS_sensor_data(start_time, end_time):
         print()  # Print a blank line for separation
 
 if __name__ == "__main__":
-    # Define the date range
-    start_time = '2024-06-02T09:00:00Z'
-    end_time = '2024-06-09T09:00:00Z'
+    # Define the date range using datetime objects
+    start_time = datetime(2024, 6, 2, 9, 0, 0)
+    end_time = datetime(2024, 6, 9, 9, 0, 0)
 
     # Download data for all sensors
     download_all_USGS_sensor_data(start_time, end_time)

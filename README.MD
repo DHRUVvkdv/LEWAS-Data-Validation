@@ -14,7 +14,7 @@ The **LEWAS Water Quality Data Verification** project aims to compare water qual
 
 1. **USGS Water Data API**
 
-- The last ten data is available on USGS.
+- The last ten days data is available via USGS API.
 
 ## Project Structure
 
