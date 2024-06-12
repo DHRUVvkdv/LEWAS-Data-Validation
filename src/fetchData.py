@@ -34,15 +34,19 @@ def fetch_USGS_observations(sensor_name, sensor_id, start_time, end_time):
     return all_observations
 
 def download_all_USGS_sensor_data(start_time, end_time):
-    # Convert start_time and end_time to the required string format
-    start_time_str = format_date(start_time)
-    end_time_str = format_date(end_time)
+    # Convert start_time and end_time to EST format
+    start_time_est = start_time.astimezone(pytz.timezone('US/Eastern'))
+    end_time_est = end_time.astimezone(pytz.timezone('US/Eastern'))
+    
+    # Format the EST start and end times as strings
+    start_time_str = start_time_est.strftime("%Y-%m-%dT%H:%M:%S%Z%z")
+    end_time_str = end_time_est.strftime("%Y-%m-%dT%H:%M:%S%Z%z")
 
     # Read the sensor data from the JSON file
     with open('config/sensor_data.json') as file:
         sensor_data = json.load(file)
 
-    # Create a folder name based on the start and end dates
+    # Create a folder name based on the start and end dates in EST format
     folder_name = f"data/raw/{start_time_str}_{end_time_str}/USGS_Data"
 
     # Create the folder if it doesn't exist
@@ -53,9 +57,15 @@ def download_all_USGS_sensor_data(start_time, end_time):
         print(f"Downloading data for sensor: {sensor_name}")
 
         # Fetch the observations for the current sensor
-        observations = fetch_USGS_observations(sensor_name, sensor_id, start_time_str, end_time_str)
+        observations = fetch_USGS_observations(sensor_name, sensor_id, format_date(start_time), format_date(end_time))
 
         if isinstance(observations, list):
+            # Convert UTC dates to EST format for each observation
+            for observation in observations:
+                utc_time = datetime.strptime(observation['phenomenonTime'], "%Y-%m-%dT%H:%M:%SZ")
+                est_time = pytz.utc.localize(utc_time).astimezone(pytz.timezone('US/Eastern'))
+                observation['phenomenonTime'] = est_time.strftime("%Y-%m-%dT%H:%M:%S%Z%z")
+
             # Generate the output file name with the sensor name
             output_file = f"{folder_name}/{sensor_name}.json"
 
