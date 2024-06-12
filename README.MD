@@ -59,10 +59,10 @@ python scripts/download_usgs_data.py
 
 Data for the following parameters are available until June 5th only when the starting date is June 2nd:
 
-- Air temperature
-- Discharge
-- Gage Height
-- Precipitation
+- Air temperature - 3 calls to get all data
+- Discharge - 3 calls to get all data
+- Gage Height - 3 calls to get all data
+- Precipitation - 3 calls to get all data
 
 The following parameters seem to have correct data, but verification with more data is recommended:
 
