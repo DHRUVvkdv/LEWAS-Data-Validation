@@ -14,7 +14,7 @@ The **LEWAS Water Quality Data Verification** project aims to compare water qual
 
 1. **USGS Water Data API**
 
-- The last ten data is available on USGS.
+- The last ten days data is available via USGS API.
 
 ## Project Structure
 
@@ -50,6 +50,8 @@ To download data from the USGS Water Data API, run the following command:
 
 ```sh
 python3 src/fetchData.py
+python3 src/fetchData.py --start-date 2024-06-02 --start-time 05:00:00 --end-date 2024-06-9 --end-time 05:00:00
+The time is 5am in EST which account to 9am to UTC (Daylight Savings ON - Jun 12)
 ```
 
 ## Errors Encountered
