@@ -20,11 +20,11 @@ The **LEWAS Water Quality Data Verification** project aims to compare water qual
 
 The project is organized as follows:
 
-- `scripts/`: Contains scripts for downloading and processing data.
 - `data/`: Directory intended for storing downloaded data files. (**Note**: Not uploaded to the repository)
-- `results/`: Directory for storing comparison results and analysis.
+- `config/`: Directory for containing the configuration files.
 - `requirements.txt`: Dependencies needed for the project.
 - `README.md`: Project documentation (this file).
+- `src/`: Directory containing the source files to run the code.
 
 ## Why No Data Folder Uploaded?
 
@@ -38,19 +38,18 @@ The `data/` folder is not uploaded to this repository due to the following reaso
 
 To obtain the necessary data, follow these steps:
 
-1. **Download Data**: Use the scripts provided in the `scripts/` directory to download data from the external sources.
+1. **Download Data**: Use the script provided in the `src/` directory to download data from the external sources.
 
-   - `download_usgs_data.py`: Script to download data from the USGS Water Data API.
-   - `download_other_data.py`: Script to download data from the other water quality data source.
+   - `fetchData.py`: Script to download data from the USGS Water Data API.
 
-2. **Store Data**: Save the downloaded data in the `data/` directory.
+2. **Store Data**: Save the downloaded data in the `data/raw/` directory.
 
 ### Example Usage
 
 To download data from the USGS Water Data API, run the following command:
 
 ```sh
-python scripts/download_usgs_data.py
+python3 src/fetchData.py
 ```
 
 ## Errors Encountered
